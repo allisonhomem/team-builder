@@ -2,57 +2,72 @@ import React, { useState } from 'react';
 
 
 function Form(props){
-    const { teamMembers } = props;
-    const [ name, setName ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ role, setRole ] = useState('');
-
-    const newName = event => {
-        setName(event.target.value);
+    const { teamMembers, setTeamMembers } = props;
+    const [ formValues, setFormValues ] = useState({name:'',email:'',role:'',newsletter:false});
+    
+    const updateForm = (event) => {
+        setFormValues({...formValues, [event.target.name]: event.target.value});
     };
+    
+    const submitForm = (event) => {
+        event.preventDefault();
+        const newTeamMember = {
+            name: formValues.name.trim(),
+            email: formValues.email.trim(),
+            role: formValues.role,
+            newsletter: formValues.newsletter
+        };
+        if(!newTeamMember.name || !newTeamMember.email || !newTeamMember.role){
+            alert `Please fill out all fields of the form :)`;
+        };
 
-    const newEmail = event => {
-        setEmail(event.target.value);
-    };
-
-    const newRole = event => {
-        setRole(event.target.value);
-    };
-
-    const newMember = event => {
-        teamMembers.push()
+        setTeamMembers(teamMembers.concat(newTeamMember));
+        setFormValues({name:'',email:'',role:'',newsletter:false});
     }
 
     return(
         <div className='Form'>
-            <h2>Become a Team Member:</h2>
+            <h2>Become a Member:</h2>
 
-            <form>
+            <form onSubmit={submitForm}>
               <label>
                 Name: 
                 <input type='text'
                        name='name'
-                       onChange={newName}
+                       value={formValues.name}
+                       onChange={updateForm}
                 />
               </label>
 
               <label>
                 Email: 
                 <input type='text'
-                       email='email'
-                       onChange={newEmail}
+                       name='email'
+                       value={formValues.email}
+                       onChange={updateForm}
                 />
               </label>
 
               <label>
                   Role: 
-                  <select >
-                      <option value='0'></option>
-                      <option value='1'>Head Chef</option>
-                      <option value='2'>Sous Chef</option>
-                      <option value='3'>Pastry Chef</option>
-                      <option value='4'>Food Critic</option>
+                  <select value={formValues.role}
+                          name='role'
+                          onChange={updateForm}>
+                      <option> - Select your preferred role - </option>
+                      <option>Head Chef</option>
+                      <option>Sous Chef</option>
+                      <option>Pastry Chef</option>
+                      <option>Food Critic</option>
                   </select>
+              </label>
+
+              <label>
+                  Wish to subscribe to our Newsletter?
+                  <input type='checkbox'
+                         name='newsletter'
+                         value={formValues.newsletter}
+                         onChange={updateForm}
+                  />
               </label>
 
               <label>

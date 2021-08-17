@@ -3,32 +3,32 @@ import React, { useState, useEffect } from 'react';
 import Form from './Form.js';
 
 const testTeam = [
-  {name:'Steven', email:'sexysteve@hotmail.com', role:'Food Critic'},
-  {name:'Allison', email:'allie_the_baker@aol.com', role:'Pastry Chef'}
+  {name:'Steven', email:'sexysteve@hotmail.com', role:'Food Critic', newsletter:false},
+  {name:'Allison', email:'allie_the_baker@aol.com', role:'Pastry Chef', newsletter:true}
 ];
 
 function App() {
-  const [ teamMembers, setTeamMembers ] = useState([{name:'',email:'',role:''}]);
+  const [ teamMembers, setTeamMembers ] = useState([]);
 
   useEffect(() => {
     setTeamMembers(testTeam);
-    console.log(teamMembers);
   },[])
-
 
   return (
     <div className="App">
       <div className="App-header">
-        <h1>Team Members Form</h1>
+        <h1> ~ The Culinary Society ~ </h1>
       </div>
 
-      <div className='Team-list'>
-        <h2>Team Members</h2>
-        {teamMembers.map(member => 
-        <h3>{member.name} is a {member.role}</h3>)}
-      </div>
-
-      <Form teamsMembers={teamMembers}/>
+      <div className='body-container'>
+        <div className='Team-list'>
+          <h2>Current Members</h2>
+          {teamMembers.map(member => 
+          <h3>{member.name} is a {member.role}</h3>)}
+        </div>
+     
+        <Form teamMembers={teamMembers} setTeamMembers={setTeamMembers}/>
+      </div> 
     </div>
   );
 }
