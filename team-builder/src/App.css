@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +35,35 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+}
+
+.Form form{
+  border: 1px outset lightslategray;
+  background-color: lightgray;
+  width: 20%;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding-left: 10%;
+  align-self: center;
+}
+
+.Form label{
+  font-weight: bold;
+  width: 50%;
+  display: flex;
+  justify-content:space-evenly;
+  align-items: flex-end;
+}
+
+.Form input{
+  color: #282c34;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
 }
